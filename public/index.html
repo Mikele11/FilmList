@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Films library</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+	<!--<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>-->
+	<!-- Latest compiled and minified CSS -->
+    <!-- Optional theme -->
+	<link href="style/styles.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+</head>
+<body>
+	<div class="header">
+		<div class="headerLeft">
+			<h4>Films library</h4>
+		</div>
+		<div class="headerRight">
+			<div id="addFilm"><span class="glyphicon glyphicon-remove-circle"></span> Add new films</div>
+		</div>
+	</div>
+	
+	<div class="mainContent" ng-controller="AppCtrl">
+	
+		<div class="content">
+			<form class="form" id="addContact">
+				<div class="formContent">
+					<label>TITLE</label>
+					<br/>
+					<input type="text" id="title" maxlength="35" ng-model="contact.title"/><br/>
+					<br/>
+					<label>YEAR</label>
+					<br/>
+					<input type="number" id="year" min="0" ng-model="contact.year"/><br/>
+					<br/>
+					<label>COUNTRY</label>
+					<br/>
+					<input type="text" id="country" maxlength="35" ng-model="contact.country"/><br/>
+					<br/>
+					<label>GENRE</label>
+					<br/>
+					<input type="text" id="genre"  ng-model="contact.genre"/><br/>
+					<br/>
+					<label>POSTER(LINK)</label>
+					<br/>
+					<input type="text" id="poster"  ng-model="contact.poster"/><br/>
+					<br/>
+					<label>DESCRIPTION</label>
+					<br/>
+					<textarea type="text" id="descr"  ng-model="contact.descr"></textarea><br/>
+					<br/>
+					<br/>
+					<button id="cancel" class="btn btn-danger" ng-click="deselect()">Cancel</button>
+					<span id="spanAdd"><button id="add" class="btn btn-primary" ng-click="addContact()">Add</button></span>
+					<button id="upd" class="btn btn-primary" ng-click="update()">update</button>
+					<br/>
+				</div>
+			</form>
+			<div class="cart" ng-style="contact.clicked && {'height': '500px'}" ng-repeat="contact in filteredTodos">
+				<div class="cartMain">
+					<div class="pict">
+						<img ng-src="{{contact.poster}}"> 
+					</div>
+					<div class="descr">
+					
+						<div class="repeattitle">	
+							{{contact.title}}
+						</div>
+						<div class="repeatdescrMovi">
+							<div>{{contact.descr}}</div>
+						</div>
+						<div class="repeatcounry">
+							<div>COUNTR</div><div>{{contact.country}}</div>						
+						</div>
+						<div class="repeatyear">
+							<div>YEAR</div><div>{{contact.year}}</div>
+						</div>
+						<div class="repeatgenre">
+							<div>GENRE</div><div>{{contact.genre}}</div>
+						</div>
+						<div class="repeatacrors">
+							<div>ACTORS</div><div></div>
+						</div>
+						<div class="repeatcartbuttons">
+							<button class="btn btn-danger" ng-click="remove(contact._id)">Delete</button>
+							<button class="editbat btn btn-primary" ng-click="edit(contact._id)">Edit</button>
+						</div>
+					</div>
+				</div>
+				<div class="cartcomment">
+					<div class="showComment">
+						<div class="comit" ng-click="contact.clicked=!contact.clicked;">Comments:  {{contact.comment.length}}</div>
+					</div>
+
+					<div class="addComment" ng-class="{'hide':!contact.clicked,'show':contact.clicked}">	
+						<ul>
+							<li ng-repeat="comnt in contact.comment"> {{ comnt }}</li>
+						</ul>
+						<input type="text" class="coment" placeholder="   Add your comment"/><br/>
+						<br/>
+						<button class="addComit" ng-click="addComent(contact._id)">Add</button>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+<script src="controllers/controller.js"></script>
+<script src="scripts/myjQuery.js"></script>
+</body>
+</html>
